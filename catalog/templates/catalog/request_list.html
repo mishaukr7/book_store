@@ -1,0 +1,99 @@
+{% extends 'catalog/base.html' %}
+{% block head %}
+{% load static%}
+
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+{% load crispy_forms_tags %}
+
+{% endblock %}
+{% block content %}
+<body>
+    {% block header %}
+
+  <div id="wrapper" class="animate">
+    <nav class="navbar header-top fixed-top navbar-expand-lg  navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'catalog:book_list'%}">HOME</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+
+        <ul class="navbar-nav ml-md-auto d-md-flex">
+
+         <li class="nav-item">
+            <a class="nav-link" href="{% url 'catalog:add_book' %}">Add book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    {% endblock header %}
+
+         {% block page %}
+
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Response</th>
+      <th scope="col">Method</th>
+      <th scope="col">Path</th>
+      <th scope="col">Time</th>
+      <th scope="col">Is secure</th>
+      <th scope="col">Is ajax</th>
+      <th scope="col">IP</th>
+      <th scope="col">User</th>
+      <th scope="col">referer</th>
+      <th scope="col">User agent</th>
+      <th scope="col">Language</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for request in requests %}
+    <tr>
+      <th scope="row">1</th>
+      <td>{{request.response}}</td>
+      <td>{{request.method}}</td>
+      <td>{{request.path}}</td>
+      <td>{{request.time}}</td>
+      <td>{{request.is_secure}}</td>
+      <td>{{request.is_ajax}}</td>
+      <td>{{request.ip}}</td>
+      <td>{{request.user}}</td>
+      <td>{{request.referer}}</td>
+      <td>{{request.user_agent}}</td>
+      <td>{{request.language}}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+    {% endblock page %}
+
+  </div>
+</body>
+{% endblock content %}
+
+{% block footer %}
+
+<div class="navbar-fixed-bottom row-fluid">
+
+<div class="footer-bottom">
+<div class="container">
+							<div class="copyright-text">
+								<p>CopyRight © 2017 Digital All Rights Reserved</p>
+							</div>
+
+				</div>
+</div>
+
+</div>
+{% endblock footer%}

@@ -1,0 +1,57 @@
+{% extends 'catalog/base.html' %}
+
+    {% block page %}
+
+      {% load templatehelpers %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+      <div class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Publish date:
+  </button>
+              {% with params=request.GET.urlencode %}
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="{% relative_url 'publish_date' 'ordering' params %}">ASC</a>
+    <a class="dropdown-item" href="{% relative_url '-publish_date' 'ordering' params %}">DESC</a>
+  </div>
+           {% endwith %}
+</div>
+
+
+
+
+                     <div class="container">
+        <div class="row">
+
+        {% if books %}
+        {% for book in books %}
+            <div class="col-md-4">
+                <div class="card-box">
+                    <div class="card-title">
+                        <h2>{{book.title}}</h2>
+                        <p>Author: {{book.author}} </p>
+                        <p>ISBN: {{book.isbn}} </p>
+                        <p>Price: {{book.price}} $</p>
+                        <p>Publish date: {{book.publish_date}} </p>
+                    </div>
+                    <div class="card-link">
+                        <a href="" class="c-link">Learn More
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+
+        </div>
+<div>
+        {% bootstrap_pagination page_obj %}
+</div>
+    </div>
+  </div>
+
+    {% endblock page %}
+
+
+
