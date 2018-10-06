@@ -55,6 +55,6 @@ class RequestListView(ListView):
     model = Request
     template_name = 'catalog/request_list.html'
     context_object_name = 'requests'
-    queryset = Request.objects.all()[:10][::-1]
+    queryset = Request.objects.all().order_by('-time')[:10]
 
 
